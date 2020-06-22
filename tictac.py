@@ -68,14 +68,21 @@ if(player1["symbol"] == "x" or player1["symbol"] == "X"): #store the opposite of
 else:
     player2["symbol"] = "X"
 
-players_turn = 1 #variable tells the loop below whose turn it is 
+turns = 0 #variable to keep track of turns 
 
 board_print(board_locations)#print board using function
 
-while(player1["winner"] == "no" and player2["winner"] == "no"): #loop stops when either player's winner key changes
-    if(players_turn == 1): #calls the board_func function and then changes the player_turn variable so that player2 can take a turn and vice-versa.
-        board_func(player1, board_locations)
-        players_turn = 2
+while(player1["winner"] == "no" and player2["winner"] == "no"): #loop stops when either player's winner key changes or satisfies first if condition
+
+    if(turns == 9): #if condition to print out a message stating its a draw when the board fills up and then breaks from the loop
+        print("Tough luck! Its a draw. :(")
+        break
+    
+    elif(turns % 2 == 0): #Player1 and player2 switch between turns depending on weather turns variable is positive or negative.
+        board_func(player1, board_locations)#calls the board_func function and then adds to the turns variables. 
+        turns += 1
     else:
         board_func(player2, board_locations)
-        players_turn = 1
+        turns += 1
+        
+        
