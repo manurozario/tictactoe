@@ -1,22 +1,22 @@
 def board_func(player, locations): #uses the player and location dictionary as inputs
 
     while(True): #asks the player where they want to place their move. If the move is valid then then store it in location dictionary with the same name and break the loop. Else loop.
-        player["move"] = input(player["name"] + ", where would you like to place your move?")  
-        if(player["move"] in locations): 
+        player["move"] = input(player["name"] + ", where would you like to place your move?")
+        if(player["move"] in locations):
             locations[player["move"]] = player["symbol"]
             break
         else:
             print("Sorry " + player["move"] + " is not a vaild location, try again.")
-        
+
     board_print(locations) #use the function to print out the board
 
     board_check(player, locations) #use the function to check weather there is a winning pattern
 
 
-    
+
 
 def board_check(player, locations): #uses the player and location dictionary as inputs
-        
+
     if(locations["tl"] == locations["tc"] == locations["tr"] or #checks horizontal, vertical and diagonal patterns of symbols respectively.
        locations["ml"] == locations["mc"] == locations["mr"] or
        locations["bl"] == locations["bc"] == locations["br"] or
@@ -31,14 +31,14 @@ def board_check(player, locations): #uses the player and location dictionary as 
 
 
 def board_print(locations): #takes in location dictionary as input and prints each location in a presentable way
-    
+
     print( f"""
     {locations["tl"]} | {locations["tc"]} | {locations["tr"]}
     ------------
     {locations["ml"]} | {locations["mc"]} | {locations["mr"]}
     ------------
     {locations["bl"]} | {locations["bc"]} | {locations["br"]}\n""")
-    
+
 
 board_locations = {"tl" : "tl", "tc" : "tc", "tr" : "tr", #dictionary for storing the locations of the tic tac toe board
                    "ml" : "ml", "mc" : "mc", "mr" : "mr",
@@ -62,13 +62,13 @@ while(True): #ask player1 what symbol they would like to use, if its valid break
 
 player2["name"] = input("\nPlayer2 enter your name: ") #ask player2 for their name
 
-if(player1["symbol"] == "x" or player1["symbol"] == "X"): #store the opposite of player1's symbol for player2 
+if(player1["symbol"] == "x" or player1["symbol"] == "X"): #store the opposite of player1's symbol for player2
     player2["symbol"] = "O"
 
 else:
     player2["symbol"] = "X"
 
-turns = 0 #variable to keep track of turns 
+turns = 0 #variable to keep track of turns
 
 board_print(board_locations)#print board using function
 
@@ -77,12 +77,10 @@ while(player1["winner"] == "no" and player2["winner"] == "no"): #loop stops when
     if(turns == 9): #if condition to print out a message stating its a draw when the board fills up and then breaks from the loop
         print("Tough luck! Its a draw. :(")
         break
-    
+
     elif(turns % 2 == 0): #Player1 and player2 switch between turns depending on weather turns variable is positive or negative.
-        board_func(player1, board_locations)#calls the board_func function and then adds to the turns variables. 
+        board_func(player1, board_locations)#calls the board_func function and then adds to the turns variables.
         turns += 1
     else:
         board_func(player2, board_locations)
         turns += 1
-        
-        
